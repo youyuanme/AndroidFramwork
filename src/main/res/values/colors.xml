@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- tab 字体颜色 背景色 -->
+    <color name="tabSelect">#DA251C</color>
+    <color name="tabunSelect">#666666</color>
+    <color name="tab_bg">#F2F2F2</color>
+    <!-- 对话框 -->
+    <color name="Gray">#e6e6e6</color>
+    <color name="dialogColor">#f0ffffff</color>
+    <color name="dialogTxtColor">#0048fc</color>
+
+</resources>
