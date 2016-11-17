@@ -29,9 +29,9 @@ import android.provider.MediaStore;
 
 /**
  * 文件与流处理工具类<br>
- * 
  */
 public final class FileUtils {
+
     /**
      * 检测SD卡是否存在
      */
@@ -44,7 +44,7 @@ public final class FileUtils {
      * 将文件保存到本地
      */
     public static void saveFileCache(byte[] fileData, String folderPath,
-            String fileName) {
+                                     String fileName) {
         File folder = new File(folderPath);
         folder.mkdirs();
         File file = new File(folderPath, fileName);
@@ -71,8 +71,8 @@ public final class FileUtils {
 
     /**
      * 从指定文件夹获取文件
-     * 
-     * @return 如果文件不存在则创建,如果如果无法创建文件或文件名为空则返回null
+     *
+     * @return 如果文件不存在则创建, 如果如果无法创建文件或文件名为空则返回null
      */
     public static File getSaveFile(String folderPath, String fileNmae) {
         File file = new File(getSavePath(folderPath) + File.separator
@@ -87,7 +87,7 @@ public final class FileUtils {
 
     /**
      * 获取SD卡下指定文件夹的绝对路径
-     * 
+     *
      * @return 返回SD卡下的指定文件夹的绝对路径
      */
     public static String getSavePath(String folderName) {
@@ -96,7 +96,7 @@ public final class FileUtils {
 
     /**
      * 获取文件夹对象
-     * 
+     *
      * @return 返回SD卡下的指定文件夹对象，若文件夹不存在则创建
      */
     public static File getSaveFolder(String folderName) {
@@ -106,8 +106,69 @@ public final class FileUtils {
         return file;
     }
 
+    /**
+     * 获取SD卡的绝对路径
+     *
+     * @return
+     */
     public static String getSDCardPath() {
         return Environment.getExternalStorageDirectory().getAbsolutePath();
+    }
+
+    /**
+     * 路径一般为: 外置储存卡路径(机型有关)/Android/data/包名/cacches
+     *
+     * @param context
+     * @return
+     */
+    public static String getExternalCacheDir(Context context) {
+        return context.getExternalCacheDir().getAbsolutePath();
+    }
+
+    /**
+     * 路径一般为:  储存卡路径(机型有关)/Movies
+     *
+     * @return
+     */
+    public static String getExternalStoragePublicDirectory() {
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath();
+    }
+
+    /**
+     * 路径一般为:外置储存卡路径(机型有关)/Android/data/包名/files
+     *
+     * @return
+     */
+    public static String getExternalFilesDir(Context context) {
+        return context.getExternalFilesDir(null).getAbsolutePath();
+    }
+
+    /**
+     * 内置储存卡路径的获取
+     * 路径一般为: /data/data/包名/files
+     */
+    public static String getFilesDir(Context context) {
+        return context.getFilesDir().getAbsolutePath();
+    }
+
+    /**
+     * 路径一般为: /data
+     *
+     * @return
+     */
+    private static String getDataDirectory() {
+        return Environment.getDataDirectory().getAbsolutePath();
+    }
+
+    /**
+     * 内置储存卡路径的获取
+     * 路径一般为: /data/data/包名/cache
+     *
+     * @param context
+     * @return
+     */
+    public static String getCacheDir(Context context) {
+        return context.getCacheDir().getAbsolutePath();
     }
 
     /**
@@ -138,10 +199,10 @@ public final class FileUtils {
      * 把uri转为File对象
      */
     @SuppressLint("NewApi")
-	public static File uri2File(Activity aty, Uri uri) {
+    public static File uri2File(Activity aty, Uri uri) {
         if (SystemTool.getSDKVersion() < 11) {
             // 在API11以下可以使用：managedQuery
-            String[] proj = { MediaStore.Images.Media.DATA };
+            String[] proj = {MediaStore.Images.Media.DATA};
             @SuppressWarnings("deprecation")
             Cursor actualimagecursor = aty.managedQuery(uri, proj, null, null,
                     null);
@@ -153,7 +214,7 @@ public final class FileUtils {
             return new File(img_path);
         } else {
             // 在API11以上：要转为使用CursorLoader,并使用loadInBackground来返回
-            String[] projection = { MediaStore.Images.Media.DATA };
+            String[] projection = {MediaStore.Images.Media.DATA};
             CursorLoader loader = new CursorLoader(aty, uri, projection, null,
                     null, null);
             Cursor cursor = loader.loadInBackground();
@@ -166,7 +227,7 @@ public final class FileUtils {
 
     /**
      * 复制文件
-     * 
+     *
      * @param from
      * @param to
      */
@@ -195,11 +256,9 @@ public final class FileUtils {
 
     /**
      * 快速复制文件（采用nio操作）
-     * 
-     * @param is
-     *            数据来源
-     * @param os
-     *            数据目标
+     *
+     * @param is 数据来源
+     * @param os 数据目标
      * @throws IOException
      */
     public static void copyFileFast(FileInputStream is, FileOutputStream os)
@@ -211,7 +270,7 @@ public final class FileUtils {
 
     /**
      * 关闭流
-     * 
+     *
      * @param closeables
      */
     public static void closeIO(Closeable... closeables) {
@@ -233,11 +292,9 @@ public final class FileUtils {
 
     /**
      * 图片写入文件
-     * 
-     * @param bitmap
-     *            图片
-     * @param filePath
-     *            文件路径
+     *
+     * @param bitmap   图片
+     * @param filePath 文件路径
      * @return 是否写入成功
      */
     public static boolean bitmapToFile(Bitmap bitmap, String filePath) {
@@ -266,7 +323,7 @@ public final class FileUtils {
 
     /**
      * 从文件中读取文本
-     * 
+     *
      * @param filePath
      * @return
      */
@@ -283,7 +340,7 @@ public final class FileUtils {
 
     /**
      * 从assets中读取文本
-     * 
+     *
      * @param name
      * @return
      */
@@ -300,7 +357,7 @@ public final class FileUtils {
 
     /**
      * 输入流转字符串
-     * 
+     *
      * @param is
      * @return 一个流中的字符串
      */
