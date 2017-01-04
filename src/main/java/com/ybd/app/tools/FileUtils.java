@@ -41,7 +41,7 @@ public final class FileUtils {
     }
 
     /**
-     * 将文件保存到本地
+     * 将文件保存到指定文件路径
      */
     public static void saveFileCache(byte[] fileData, String folderPath,
                                      String fileName) {
@@ -116,7 +116,7 @@ public final class FileUtils {
     }
 
     /**
-     * 路径一般为: 外置储存卡路径(机型有关)/Android/data/包名/cacches
+     * 路径一般为: 外置储存卡路径(机型有关)/Android/data/包名/cache
      *
      * @param context
      * @return
@@ -172,6 +172,18 @@ public final class FileUtils {
     }
 
     /**
+     * 判断指定文件夹目录中是否存在指定文件
+     *
+     * @param folderPath
+     * @param fileNmae
+     * @return
+     */
+    public static boolean isFileExists(String folderPath, String fileNmae) {
+        File file = new File(folderPath + File.separator + fileNmae);
+        return file.exists();
+    }
+
+    /**
      * 输入流转byte[]<br>
      */
     public static final byte[] input2byte(InputStream inStream) {
@@ -222,6 +234,18 @@ public final class FileUtils {
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return new File(cursor.getString(column_index));
+        }
+    }
+
+    /**
+     * 删除指定路径文件
+     *
+     * @param fileName
+     */
+    public static void delFile(String fileName) {
+        File file = new File(fileName);
+        if (file.isFile()) {
+            file.delete();
         }
     }
 

@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 
 /**
  * 字符串操作工具包<br>
- * 
+ * <p>
  * <b>创建时间</b> 2014-8-14
- * 
+ *
  * @author kymjs (https://github.com/kymjs)
  * @version 1.1
  */
@@ -36,6 +36,41 @@ public class StringUtils {
             }
         }
         return true;
+    }
+
+    /**
+     * 获取url中文件名字(包括文件的后缀名)
+     *
+     * @param url
+     * @return
+     */
+    public static String getUrlFileName(String url) {
+        String substring = null;
+        String suffixes = "avi|mpeg|3gp|mp3|mp4|wav|jpeg|gif|jpg|png|apk|exe|txt|html|zip|java|doc";
+        Pattern pat = Pattern.compile("[\\w]+[\\.](" + suffixes + ")");//正则判断
+        Matcher mc = pat.matcher(url);//条件匹配
+        while (mc.find()) {
+            substring = mc.group();//截取文件名后缀名
+        }
+        return substring;
+    }
+
+    /**
+     * 获取链接的后缀名
+     *
+     * @return
+     */
+    public static String parseSuffix(String url) {
+        final Pattern pattern = Pattern.compile("\\S*[?]\\S*");
+        Matcher matcher = pattern.matcher(url);
+        String[] spUrl = url.toString().split("/");
+        int len = spUrl.length;
+        String endUrl = spUrl[len - 1];
+        if (matcher.find()) {
+            String[] spEndUrl = endUrl.split("\\?");
+            return spEndUrl[0].split("\\.")[1];
+        }
+        return endUrl.split("\\.")[1];
     }
 
     /**
@@ -66,7 +101,7 @@ public class StringUtils {
 
     /**
      * 字符串转整数
-     * 
+     *
      * @param str
      * @param defValue
      * @return
@@ -81,7 +116,7 @@ public class StringUtils {
 
     /**
      * 对象转整
-     * 
+     *
      * @param obj
      * @return 转换异常返回 0
      */
@@ -93,7 +128,7 @@ public class StringUtils {
 
     /**
      * String转long
-     * 
+     *
      * @param obj
      * @return 转换异常返回 0
      */
@@ -107,7 +142,7 @@ public class StringUtils {
 
     /**
      * String转double
-     * 
+     *
      * @param obj
      * @return 转换异常返回 0
      */
@@ -121,7 +156,7 @@ public class StringUtils {
 
     /**
      * 字符串转布尔
-     * 
+     *
      * @param b
      * @return 转换异常返回 false
      */
@@ -147,9 +182,8 @@ public class StringUtils {
 
     /**
      * byte[]数组转换为16进制的字符串。
-     * 
-     * @param data
-     *            要转换的字节数组。
+     *
+     * @param data 要转换的字节数组。
      * @return 转换后的结果。
      */
     public static final String byteArrayToHexString(byte[] data) {
@@ -166,9 +200,8 @@ public class StringUtils {
 
     /**
      * 16进制表示的字符串转换为字节数组。
-     * 
-     * @param s
-     *            16进制表示的字符串
+     *
+     * @param s 16进制表示的字符串
      * @return byte[] 字节数组
      */
     public static byte[] hexStringToByteArray(String s) {
@@ -198,7 +231,7 @@ public class StringUtils {
 
     /**
      * 以友好的方式显示时间
-     * 
+     *
      * @param sdate
      * @return
      */
@@ -263,7 +296,7 @@ public class StringUtils {
 
     /**
      * 将字符串转位日期类型
-     * 
+     *
      * @param sdate
      * @return
      */
@@ -281,7 +314,7 @@ public class StringUtils {
 
     /**
      * 判断用户的设备时区是否为东八区（中国） 2014年7月31日
-     * 
+     *
      * @return
      */
     public static boolean isInEasternEightZones() {
@@ -295,12 +328,12 @@ public class StringUtils {
 
     /**
      * 根据不同时区，转换时间 2014年7月31日
-     * 
+     *
      * @param time
      * @return
      */
     public static Date transformTime(Date date, TimeZone oldZone,
-            TimeZone newZone) {
+                                     TimeZone newZone) {
         Date finalDate = null;
         if (date != null) {
             int timeOffset = oldZone.getOffset(date.getTime())
