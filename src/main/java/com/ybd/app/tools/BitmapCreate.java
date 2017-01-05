@@ -2,10 +2,12 @@ package com.ybd.app.tools;
 
 import java.io.InputStream;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.view.View;
 
 /**
  * 不会发生OOM的 BitmapFactory<br>
@@ -30,8 +32,8 @@ public class BitmapCreate {
         decorview.buildDrawingCache();
         Bitmap bitmap = decorview.getDrawingCache();
         // 获取截取屏幕的宽高
-        int w = MyUtils.getWindowWidth(activity) - rightWidth;
-        int h = MyUtils.getWindowHeight(activity);
+        int w = DensityUtils.getScreenW(activity) - rightWidth;
+        int h = DensityUtils.getScreenH(activity);
         // 截取
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, h);
         // bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
