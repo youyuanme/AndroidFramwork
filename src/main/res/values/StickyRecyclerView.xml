@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StickyRecyclerView">
+        // 分割线的高度
+        <attr name="dividerHeight" format="dimension"/>
+        // 分栏的高度
+        <attr name="titleHeight" format="dimension"/>
+        // 分割线颜色
+        <attr name="dividerColor" format="color"/>
+        // 分栏背景色
+        <attr name="titleColor" format="color"/>
+        // 分栏文字颜色
+        <attr name="titleTextColor" format="color"/>
+    </declare-styleable>
+</resources>
